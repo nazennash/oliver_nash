@@ -1,0 +1,184 @@
+import React, { useState, useEffect } from 'react';
+import { Cart, Envelope, Heart, Person } from 'react-bootstrap-icons';
+import axios from 'axios';
+
+export const Navbar = () => {
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [cartItemCount, setCartItemCount] = useState(0);
+
+	useEffect(() => {
+		checkLoggedInStatus();
+		getCartItemCount();
+		const interval = setInterval(getCartItemCount, 1000);
+
+		return () => clearInterval(interval);
+	}, []);
+
+	const checkLoggedInStatus = async () => {
+		try {
+			const token = localStorage.getItem('token');
+
+			if (token) {
+				const response = await axios.get(
+					'http://127.0.0.1:8000/api/check-authenticated/',
+					{
+						headers: {
+							Authorization: `Token ${token}`,
+						},
+					}
+				);
+
+				if (response.status === 200) {
+					console.log('User logged in');
+					setIsLoggedIn(true);
+				}
+			} else {
+				setIsLoggedIn(false);
+			}
+		} catch (error) {
+			setIsLoggedIn(false);
+			console.error('Error checking login status:', error.message);
+		}
+	};
+
+	const getCartItemCount = async () => {
+		try {
+			const token = localStorage.getItem('token');
+
+			if (token) {
+				const response = await axios.get(
+					'http://127.0.0.1:8000/api/cart/',
+					{
+						headers: {
+							Authorization: `Token ${token}`,
+						},
+					}
+				);
+
+				if (response.status === 200) {
+					const totalQuantity = response.data.cart_items.reduce(
+						(total, item) => total + item.quantity,
+						0
+					);
+					setCartItemCount(totalQuantity);
+				}
+			}
+		} catch (error) {
+			console.error('Error fetching cart items:', error.message);
+		}
+	};
+
+	const handleLogout = async () => {
+		try {
+			const token = localStorage.getItem('token');
+
+			const response = await axios.post(
+				'http://127.0.0.1:8000/api/logout/',
+				{},
+				{
+					headers: {
+						Authorization: `Token ${token}`,
+					},
+				}
+			);
+			if (response.status === 200) {
+				localStorage.removeItem('token');
+				setIsLoggedIn(false);
+			} else {
+				console.error('Logout failed');
+			}
+		} catch (error) {
+			console.error('Error logging out:', error.message);
+		}
+	};
+
+	// search
+
+	// State for the search query
+	const [searchQuery, setSearchQuery] = useState('');
+
+	// Event handler for input change
+	const handleInputChange = (event) => {
+		setSearchQuery(event.target.value);
+	};
+
+	// Event handler for form submit (optional)
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		// Perform search logic here (e.g., navigate to search results page)
+		console.log('Search query:', searchQuery);
+	};
+
+	return (
+		<div>
+			<header className='text-gray-600 body-font bg-gray-50 shadow-md'>
+				<div className='container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center'>
+					<a
+						className='flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0'
+						href='/'
+					>
+						<span className='ml-3 text-xl font-bold'>Pinacore</span>
+					</a>
+					<nav className='md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center'>
+						{isLoggedIn ? (
+							<>
+								<a className='mr-5 hover:text-gray-900'>
+									<span>Messages</span>
+								</a>
+								<a className='mr-5 hover:text-gray-900'>
+									<span>Favourite</span>
+								</a>
+								<a className='mr-5 hover:text-gray-900'>
+									<span>
+										Cart:
+										<span
+											className='bg-blue-500 p-1 text-white rounded-2xl text-[12px] font-bold'
+											id='cart-count'
+										>
+											{cartItemCount}
+										</span>
+									</span>
+								</a>
+								<button
+									className='mr-5 hover:text-gray-900'
+									onClick={handleLogout}
+								>
+									<span>Logout</span>
+								</button>
+							</>
+						) : (
+							<>
+								<a className='mr-5 hover:text-gray-900'>
+									<span>
+										Cart:
+										<span
+											className='bg-blue-500 p-1 text-white rounded-2xl text-[12px] font-bold'
+											id='cart-count'
+										>
+											{cartItemCount}
+										</span>
+									</span>
+								</a>
+								<a
+									className='mr-5 hover:text-gray-900'
+									href='/register'
+								>
+									<span>Login</span>
+								</a>
+							</>
+						)}
+					</nav>
+					<form onSubmit={handleSubmit} className='hidden md:block'>
+						<input
+							type='text'
+							value={searchQuery}
+							onChange={handleInputChange}
+							placeholder='Search...'
+							className='border border-gray-300 bg-white h-10 px-5 rounded-lg text-sm focus:outline-none flex-1'
+						/>
+					</form>
+				</div>
+			</header>
+		</div>
+	);
+};
