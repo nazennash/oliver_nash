@@ -12,7 +12,7 @@ export const NewArrivals = () => {
 		try {
 			const url = 'http://127.0.0.1:8000/api/new-arrivals/';
 			const response = await axios.get(url);
-			console.log('data', response.data);
+			// console.log('data', response.data);
 			setNewItems(response.data);
 		} catch (error) {
 			console.error('Error fetching new items:', error.message);

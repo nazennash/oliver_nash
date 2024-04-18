@@ -21,7 +21,7 @@ export const AfterNav = () => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		// Perform search logic here (e.g., navigate to search results page)
-		console.log('Search query:', searchQuery);
+		// console.log('Search query:', searchQuery);
 	};
 
 	return (

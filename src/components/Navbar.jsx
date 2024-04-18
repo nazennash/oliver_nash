@@ -1,45 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Cart, Envelope, Heart, Person } from 'react-bootstrap-icons';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(
+		!!localStorage.getItem('token')
+	);
 	const [cartItemCount, setCartItemCount] = useState(0);
 
 	useEffect(() => {
-		checkLoggedInStatus();
 		getCartItemCount();
-		const interval = setInterval(getCartItemCount, 1000);
+		const interval = setInterval(getCartItemCount, 10000);
 
 		return () => clearInterval(interval);
 	}, []);
-
-	const checkLoggedInStatus = async () => {
-		try {
-			const token = localStorage.getItem('token');
-
-			if (token) {
-				const response = await axios.get(
-					'http://127.0.0.1:8000/api/check-authenticated/',
-					{
-						headers: {
-							Authorization: `Token ${token}`,
-						},
-					}
-				);
-
-				if (response.status === 200) {
-					console.log('User logged in');
-					setIsLoggedIn(true);
-				}
-			} else {
-				setIsLoggedIn(false);
-			}
-		} catch (error) {
-			setIsLoggedIn(false);
-			console.error('Error checking login status:', error.message);
-		}
-	};
 
 	const getCartItemCount = async () => {
 		try {
@@ -71,6 +45,10 @@ export const Navbar = () => {
 	const handleLogout = async () => {
 		try {
 			const token = localStorage.getItem('token');
+			if (!token) {
+				console.error('Token not found');
+				return;
+			}
 
 			const response = await axios.post(
 				'http://127.0.0.1:8000/api/logout/',
@@ -81,6 +59,9 @@ export const Navbar = () => {
 					},
 				}
 			);
+
+			console.log('Logout response:', response);
+
 			if (response.status === 200) {
 				localStorage.removeItem('token');
 				setIsLoggedIn(false);
@@ -91,8 +72,6 @@ export const Navbar = () => {
 			console.error('Error logging out:', error.message);
 		}
 	};
-
-	// search
 
 	// State for the search query
 	const [searchQuery, setSearchQuery] = useState('');
@@ -128,7 +107,10 @@ export const Navbar = () => {
 								<a className='mr-5 hover:text-gray-900'>
 									<span>Favourite</span>
 								</a>
-								<a className='mr-5 hover:text-gray-900'>
+								<Link
+									to='cart'
+									className='mr-5 hover:text-gray-900'
+								>
 									<span>
 										Cart:
 										<span
@@ -138,7 +120,7 @@ export const Navbar = () => {
 											{cartItemCount}
 										</span>
 									</span>
-								</a>
+								</Link>
 								<button
 									className='mr-5 hover:text-gray-900'
 									onClick={handleLogout}

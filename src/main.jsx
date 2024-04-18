@@ -6,8 +6,6 @@ import { Carousel } from 'flowbite-react';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
-		{/* <BrowserRouter> */}
 		<App />
-		{/* </BrowserRouter> */}
 	</React.StrictMode>
 );

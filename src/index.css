@@ -10,7 +10,15 @@
     flex-direction: column;
 }
 
-
-.container {
+.root-container {
     flex: 1;
+}
+
+.card-img {
+    width: 50%;
+    height: auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    object-fit: cover;
 }

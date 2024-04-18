@@ -12,7 +12,7 @@ export const Products = () => {
 		try {
 			const url = 'http://127.0.0.1:8000/api/products/';
 			const response = await axios.get(url);
-			console.log('data', response.data);
+			// console.log('data', response.data);
 			setProducts(response.data);
 		} catch (error) {
 			console.error('Error fetching new items:', error.message);
@@ -55,7 +55,7 @@ export const Products = () => {
 
 				<div className='grid xl:grid-cols-7 lg:grid-cols-5 md:grid-cols-3 md:gap-5 grid-cols-2 gap-2 mt-10'>
 					{products.map((product, index) => (
-						<div>
+						<div key={index}>
 							<div
 								className='border rounded-xl mx-auto p-5'
 								key={index}

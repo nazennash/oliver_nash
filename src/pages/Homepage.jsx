@@ -1,11 +1,9 @@
 import { FirstInfo } from '../components/FirstInfo';
-import { Navbar } from '../components/Navbar';
 import { NewArrivals } from '../components/NewArrivals';
 import { Products } from '../components/Products';
 import { SecondInfo } from '../components/SecondInfo';
 import { ThirdInfo } from '../components/ThirdInfo';
 import { BrowseByCategory } from '../components/BrowseByCategory';
-import { Footer } from '../components/Footer';
 import { SlideShow } from '../components/SlideShow';
 import { MainCategoryList } from '../components/MainCategoryList';
 import { AfterNav } from '../components/AfterNav';
@@ -13,7 +11,6 @@ import { AfterNav } from '../components/AfterNav';
 export const Homepage = () => {
 	return (
 		<div>
-			<Navbar />
 			<div className='block md:hidden'>
 				<AfterNav />
 			</div>
@@ -32,7 +29,6 @@ export const Homepage = () => {
 			<Products />
 			<ThirdInfo />
 			<BrowseByCategory />
-			<Footer />
 		</div>
 	);
 };

@@ -12,7 +12,7 @@ export const BrowseByCategory = () => {
 		try {
 			const url = 'http://127.0.0.1:8000/api/main-category/';
 			const response = await axios.get(url);
-			console.log('data', response.data);
+			// console.log('data', response.data);
 			setCategories(response.data);
 		} catch (error) {
 			console.error('Error fetching new items:', error.message);
