@@ -43,14 +43,21 @@ export function Register() {
 				'http://127.0.0.1:8000/api/register/',
 				{ phone_number: phoneNumber, name }
 			);
-			if (response.status === 200) {
+			if (response.data.status === 200) {
+				console;
+				console.log('One', response.data.status);
 				setIsRegistered(true);
-				setError('');
-			} else {
-				setError('Registration failed');
+				const token = response.data.data.token;
+				localStorage.setItem('token', token);
+				setToken(token);
+				navigate('/');
+			} else if (response.data.status === 409) {
+				console.log('Two', response.data.detail);
+				setError('Phone number is already registered');
+				setIsLogin(false);
 			}
 		} catch (error) {
-			setError(error.response?.data?.detail || 'Registration failed');
+			setError(error.response?.data?.detail);
 		}
 	};
 

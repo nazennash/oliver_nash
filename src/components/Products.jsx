@@ -22,6 +22,7 @@ export const Products = () => {
 	const addToCart = async (productId) => {
 		try {
 			const token = localStorage.getItem('token');
+			const session_id = localStorage.getItem('session_id');
 
 			if (token) {
 				const response = await axios.post(
@@ -30,6 +31,7 @@ export const Products = () => {
 					{
 						headers: {
 							Authorization: `Token ${token}`,
+							'X-Session-ID': session_id,
 						},
 					}
 				);

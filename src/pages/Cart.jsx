@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { DashCircle, PlusCircle } from 'react-bootstrap-icons';
+import gif from '../assets/thank_you.gif';
 
 export const Cart = () => {
 	const [cartItems, setCartItems] = useState([]);
 	const [subtotal, setSubtotal] = useState(0);
 	const [shippingAmount, setShippingAmount] = useState(0);
 	const [totalAmount, setTotalAmount] = useState(0);
+	const [showModal, setShowModal] = useState(false);
 
 	useEffect(() => {
 		getCartItems();
@@ -129,8 +131,11 @@ export const Cart = () => {
 
 				if (response.status === 201) {
 					console.log('Payment successful');
+					setShowModal(true);
 				} else {
 					console.error('Failed to process payment');
+					setShowModal(true);
+					--testing;
 				}
 			}
 		} catch (error) {
@@ -145,6 +150,23 @@ export const Cart = () => {
 					Shopping Cart
 				</h3>
 			</div>
+			{showModal && (
+				<div className='fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75'>
+					<div className='bg-white p-8 rounded-lg'>
+						<h2 className='text-2xl font-bold mb-4'>Success!</h2>
+						<img src={gif} alt='' />
+						<p>Check your phone for payment prompt.</p>
+						<p>Bridging the digital divide</p>
+						<p></p>
+						<button
+							className='mt-4 bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none'
+							onClick={() => setShowModal(false)}
+						>
+							Close
+						</button>
+					</div>
+				</div>
+			)}
 			<div className='grid md:grid-cols-12 md:gap-5 md:m-5'>
 				<div className='md:col-span-9 col-span-12'>
 					<div className=''>
