@@ -2,7 +2,7 @@ import React from 'react';
 
 export const SecondInfo = () => {
 	return (
-		<div className='hidden md:block'>
+		<div className='container mx-auto hidden md:block'>
 			<div className='container mx-auto text-white grid md:grid-cols-3 gap-10 p-6'>
 				<div className='bg-[#212529] p-4 rounded-lg'>
 					<p className='mb-4'>Only This Week</p>
@@ -36,6 +36,7 @@ export const SecondInfo = () => {
 				</div>
 			</div>
 			<br />
+			<hr />
 			<br />
 		</div>
 	);

@@ -3,17 +3,16 @@ import axios from 'axios';
 
 export const Products = () => {
 	const [products, setProducts] = useState([]);
-	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {
 		getProducts();
-	}, [currentPage]); // Trigger effect when currentPage changes
+	}, []);
 
 	const getProducts = async () => {
 		try {
-			const url = `http://127.0.0.1:8000/api/products/?page=${currentPage}`;
+			const url = 'http://127.0.0.1:8000/api/products/';
 			const response = await axios.get(url);
-			setProducts(response.data.results); // Assuming pagination response contains 'results' field
+			setProducts(response.data);
 		} catch (error) {
 			console.error('Error fetching products:', error.message);
 		}
@@ -21,43 +20,27 @@ export const Products = () => {
 
 	const addToCart = async (productId) => {
 		try {
-			const token = localStorage.getItem('token');
-
-			if (token) {
-				const response = await axios.post(
-					`http://127.0.0.1:8000/api/add-to-cart/${productId}/`,
-					{ product_id: productId },
-					{
-						headers: {
-							Authorization: `Token ${token}`,
-						},
-					}
-				);
-
-				if (response.status === 201) {
-					console.log('Product added to cart successfully');
-				} else {
-					console.error('Failed to add product to cart');
+			const response = await axios.post(
+				`http://127.0.0.1:8000/api/add-to-cart/${productId}/`,
+				null,
+				{
+					withCredentials: true,
 				}
+			);
+
+			if (response.status === 201) {
+				console.log('Product added to cart successfully');
+			} else {
+				console.error('Failed to add product to cart');
 			}
 		} catch (error) {
 			console.error('Error adding product to cart:', error.message);
 		}
 	};
 
-	const nextPage = () => {
-		setCurrentPage(currentPage + 1);
-	};
-
-	const prevPage = () => {
-		if (currentPage > 1) {
-			setCurrentPage(currentPage - 1);
-		}
-	};
-
 	return (
-		<div>
-			<div className='container mx-auto px-6 mb-1 '>
+		<div className='container mx-auto'>
+			<div className='px-6 mb-1 '>
 				<span className='font-bold text-[22px]'>Products | </span>
 				<span>
 					Don't miss the current offers until the end of April
@@ -110,26 +93,9 @@ export const Products = () => {
 						</div>
 					))}
 				</div>
-
-				<div className='mt-4 flex justify-center'>
-					<button
-						onClick={prevPage}
-						disabled={currentPage === 1}
-						className='mr-2 px-3 py-1 bg-blue-500 text-white rounded-md'
-					>
-						Previous
-					</button>
-					<button
-						onClick={nextPage}
-						className='px-3 py-1 bg-blue-500 text-white rounded-md'
-					>
-						Next
-					</button>
-				</div>
 			</div>
 			<br />
 			<br />
-			<hr />
 		</div>
 	);
 };

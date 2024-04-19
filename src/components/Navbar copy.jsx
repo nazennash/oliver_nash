@@ -18,24 +18,24 @@ export const Navbar = () => {
 	const getCartItemCount = async () => {
 		try {
 			const token = localStorage.getItem('token');
+			const session_id = localStorage.getItem('session_id');
 
-			if (token) {
-				const response = await axios.get(
-					'http://127.0.0.1:8000/api/cart/',
-					{
-						headers: {
-							Authorization: `Token ${token}`,
-						},
-					}
-				);
-
-				if (response.status === 200) {
-					const totalQuantity = response.data.cart_items.reduce(
-						(total, item) => total + item.quantity,
-						0
-					);
-					setCartItemCount(totalQuantity);
+			const response = await axios.get(
+				'http://127.0.0.1:8000/api/cart/',
+				{
+					headers: {
+						Authorization: token ? `Token ${token}` : '',
+						'X-Session-ID': session_id,
+					},
 				}
+			);
+
+			if (response.status === 200) {
+				const totalQuantity = response.data.cart_items.reduce(
+					(total, item) => total + item.quantity,
+					0
+				);
+				setCartItemCount(totalQuantity);
 			}
 		} catch (error) {
 			console.error('Error fetching cart items:', error.message);

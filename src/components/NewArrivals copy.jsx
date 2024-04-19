@@ -3,17 +3,16 @@ import axios from 'axios';
 
 export const NewArrivals = () => {
 	const [newItems, setNewItems] = useState([]);
-	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {
 		getNewItems();
-	}, [currentPage]); // Trigger effect when currentPage changes
+	}, []);
 
 	const getNewItems = async () => {
 		try {
-			const url = `http://127.0.0.1:8000/api/new-arrivals/?page=${currentPage}`;
+			const url = 'http://127.0.0.1:8000/api/new-arrivals/';
 			const response = await axios.get(url);
-			setNewItems(response.data.results); // Assuming pagination response contains 'results' field
+			setNewItems(response.data);
 		} catch (error) {
 			console.error('Error fetching new items:', error.message);
 		}
@@ -21,43 +20,27 @@ export const NewArrivals = () => {
 
 	const addToCart = async (productId) => {
 		try {
-			const token = localStorage.getItem('token');
-
-			if (token) {
-				const response = await axios.post(
-					`http://127.0.0.1:8000/api/add-to-cart/${productId}/`,
-					{ product_id: productId },
-					{
-						headers: {
-							Authorization: `Token ${token}`,
-						},
-					}
-				);
-
-				if (response.status === 201) {
-					console.log('Product added to cart successfully');
-				} else {
-					console.error('Failed to add product to cart');
+			const response = await axios.post(
+				`http://127.0.0.1:8000/api/add-to-cart/${productId}/`,
+				null,
+				{
+					withCredentials: true,
 				}
+			);
+
+			if (response.status === 201) {
+				console.log('Product added to cart successfully');
+			} else {
+				console.error('Failed to add product to cart');
 			}
 		} catch (error) {
 			console.error('Error adding product to cart:', error.message);
 		}
 	};
 
-	const nextPage = () => {
-		setCurrentPage(currentPage + 1);
-	};
-
-	const prevPage = () => {
-		if (currentPage > 1) {
-			setCurrentPage(currentPage - 1);
-		}
-	};
-
 	return (
-		<div className='container mx-auto'>
-			<div className='px-6 mb-1 '>
+		<div>
+			<div className='container mx-auto px-6 mb-1 '>
 				<span className='font-bold text-[22px]'>New Arrivals | </span>
 				<span>
 					Don't miss this opportunity at a special discount Up
@@ -107,26 +90,8 @@ export const NewArrivals = () => {
 						</div>
 					))}
 				</div>
-
-				<div className='mt-4 flex justify-center'>
-					<button
-						onClick={prevPage}
-						disabled={currentPage === 1}
-						className='mr-2 px-3 py-1 bg-blue-500 text-white rounded-md'
-					>
-						Previous
-					</button>
-					<button
-						onClick={nextPage}
-						disabled={!newItems.length} // Disable if no more items
-						className='px-3 py-1 bg-blue-500 text-white rounded-md'
-					>
-						Next
-					</button>
-				</div>
 			</div>
 			<br />
-			<hr />
 			<br />
 		</div>
 	);

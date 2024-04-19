@@ -16,22 +16,22 @@ export const Cart = () => {
 	const getCartItems = async () => {
 		try {
 			const token = localStorage.getItem('token');
+			const session_id = localStorage.getItem('session_id');
 
-			if (token) {
-				const response = await axios.get(
-					`http://127.0.0.1:8000/api/cart/`,
-					{
-						headers: {
-							Authorization: `Token ${token}`,
-						},
-					}
-				);
-				setCartItems(response.data.cart_items);
-				setShippingAmount(response.data.shipping_amount);
-				setTotalAmount(response.data.total_amount);
-				calculateSubtotal(response.data.cart_items);
-				console.log('Cart items:', response.data);
-			}
+			const response = await axios.get(
+				`http://127.0.0.1:8000/api/cart/`,
+				{
+					headers: {
+						Authorization: token ? `Token ${token}` : '',
+						'X-Session-ID': session_id,
+					},
+				}
+			);
+			setCartItems(response.data.cart_items);
+			setShippingAmount(response.data.shipping_amount);
+			setTotalAmount(response.data.total_amount);
+			calculateSubtotal(response.data.cart_items);
+			console.log('Cart items:', response.data);
 		} catch (error) {
 			console.error('Error fetching cart items:', error.message);
 		}
@@ -49,17 +49,13 @@ export const Cart = () => {
 		try {
 			const token = localStorage.getItem('token');
 
-			if (token) {
-				await axios.delete(
-					`http://127.0.0.1:8000/api/delete/${itemId}/`,
-					{
-						headers: {
-							Authorization: `Token ${token}`,
-						},
-					}
-				);
-				getCartItems();
-			}
+			await axios.delete(`http://127.0.0.1:8000/api/delete/${itemId}/`, {
+				headers: {
+					Authorization: token ? `Token ${token}` : '',
+					'X-Session-ID': session_id,
+				},
+			});
+			getCartItems();
 		} catch (error) {
 			console.error('Error removing item from cart:', error.message);
 		}
@@ -69,18 +65,17 @@ export const Cart = () => {
 		try {
 			const token = localStorage.getItem('token');
 
-			if (token) {
-				await axios.patch(
-					`http://127.0.0.1:8000/api/add/${itemId}/`,
-					null,
-					{
-						headers: {
-							Authorization: `Token ${token}`,
-						},
-					}
-				);
-				getCartItems();
-			}
+			await axios.patch(
+				`http://127.0.0.1:8000/api/add/${itemId}/`,
+				null,
+				{
+					headers: {
+						Authorization: token ? `Token ${token}` : '',
+						'X-Session-ID': session_id,
+					},
+				}
+			);
+			getCartItems();
 		} catch (error) {
 			console.error('Error adding quantity:', error.message);
 		}
@@ -90,18 +85,16 @@ export const Cart = () => {
 		try {
 			const token = localStorage.getItem('token');
 
-			if (token) {
-				await axios.patch(
-					`http://127.0.0.1:8000/api/subtract/${itemId}/`,
-					null,
-					{
-						headers: {
-							Authorization: `Token ${token}`,
-						},
-					}
-				);
-				getCartItems();
-			}
+			await axios.patch(
+				`http://127.0.0.1:8000/api/subtract/${itemId}/`,
+				null,
+				{
+					headers: {
+						Authorization: `Token ${token}`,
+					},
+				}
+			);
+			getCartItems();
 		} catch (error) {
 			console.error('Error subtracting quantity:', error.message);
 		}

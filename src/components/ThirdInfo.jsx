@@ -3,8 +3,8 @@ import { Phone, ShieldCheck, Truck } from 'react-bootstrap-icons';
 
 export const ThirdInfo = () => {
 	return (
-		<div>
-			<div className='container mx-auto my-10 gap-7 grid lg:grid-cols-3 md:gap-20 md:grid-cols-2 md:p-5 shadow-md'>
+		<div className='container mx-auto'>
+			<div className=' my-10 gap-7 grid lg:grid-cols-3 md:gap-20 md:grid-cols-2 md:p-5 shadow-md'>
 				<div className='col-span-1 text-center'>
 					<Truck size={25} className='inline-block my-2 font-bold' />
 					<h1 className='text-xl font-bold'>

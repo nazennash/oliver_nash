@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { DashCircle, PlusCircle } from 'react-bootstrap-icons';
+import {
+	Dash,
+	DashCircle,
+	Plus,
+	PlusSquare,
+	TextCenter,
+} from 'react-bootstrap-icons';
 
 export const Cart = () => {
 	const [cartItems, setCartItems] = useState([]);
@@ -182,23 +188,23 @@ export const Cart = () => {
 										</p>
 										<div className='flex items-center'>
 											<button
-												className='text-white px-1 rounded-xl hover:text-gray-700 focus:outline-none'
+												className='text-gray-500 hover:text-gray-700 focus:outline-none'
 												onClick={() =>
 													handleMinusQuantity(item.id)
 												}
 											>
-												<DashCircle color='red' />
+												-
 											</button>
-											<span className='mx-1'>
+											<span className='mx-2'>
 												{item.quantity}
 											</span>
 											<button
-												className=' text-white  px-1 rounded-xl hover:text-gray-700 focus:outline-none'
+												className='text-gray-500 hover:text-gray-700 focus:outline-none'
 												onClick={() =>
 													handleAddQuantity(item.id)
 												}
 											>
-												<PlusCircle color='blue' />
+												+
 											</button>
 										</div>
 									</div>

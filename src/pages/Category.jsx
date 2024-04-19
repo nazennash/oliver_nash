@@ -57,57 +57,73 @@ export const Category = () => {
 				</form>
 			</div>
 			<div className='grid lg:grid-cols-12 gap-5'>
-				<div className='lg:col-span-3 hidden md:block'>
-					<div className=''>
-						<Link to='#' className='' aria-current='true'>
-							Main Categories
-						</Link>
-
-						{uniqueSubCategories.map((category, index) => (
-							<Link key={index} to='#' className=''>
-								{category}
+				<div className='lg:col-span-2 lg:grid  hidden md:block'>
+					<div className='mb-3'>
+						<div className='bg-blue-500 p-3 text-[16px] font-bold text-white rounded-t-lg mb-3'>
+							<Link
+								to='#'
+								className='bg-blue-500'
+								aria-current='true'
+							>
+								Main Categories
 							</Link>
-						))}
+						</div>
+						<div className='px-2 text-[16px] font-bold  rounded-t-lg mb-3'>
+							{uniqueSubCategories.map((category, index) => (
+								<Link key={index} to='#' className=''>
+									{category}
+								</Link>
+							))}
+						</div>
+					</div>
+
+					<div className='mb-3'>
+						<div className='bg-blue-500 p-3 text-[16px] font-bold text-white rounded-t-lg mb-3'>
+							<Link to='#' className='' aria-current='true'>
+								Categories
+							</Link>
+						</div>
+						<div className='px-2 text-[16px] font-bold  rounded-t-lg mb-3'>
+							{uniqueSubTypeCategories.map((category, index) => (
+								<Link key={index} to='#' className=''>
+									{category}
+								</Link>
+							))}
+						</div>
+					</div>
+
+					<div className='mb-3'>
+						<div className='bg-blue-500 p-3 text-[16px] font-bold text-white rounded-t-lg mb-3'>
+							<Link to='#' className='' aria-current='true'>
+								Sub-Categories
+							</Link>
+						</div>
+						<div className='px-2 text-[16px] font-bold  rounded-t-lg mb-3'>
+							{uniqueCategories.map((category, index) => (
+								<Link key={index} to='#' className=''>
+									{category}
+								</Link>
+							))}
+						</div>
 					</div>
 
 					<div className=''>
-						<Link to='#' className='' aria-current='true'>
-							Categories
-						</Link>
-
-						{uniqueSubTypeCategories.map((category, index) => (
-							<Link key={index} to='#' className=''>
-								{category}
+						<div className='bg-blue-500 p-3 text-[16px] font-bold text-white rounded-t-lg mb-3'>
+							<Link to='#' className='' aria-current='true'>
+								Brand
 							</Link>
-						))}
-					</div>
-
-					<div className=''>
-						<Link to='#' className='' aria-current='true'>
-							Sub-Categories
-						</Link>
-
-						{uniqueCategories.map((category, index) => (
-							<Link key={index} to='#' className=''>
-								{category}
-							</Link>
-						))}
-					</div>
-
-					<div className='list-group'>
-						<Link to='#' className='' aria-current='true'>
-							Brand
-						</Link>
-
-						{uniqueBrands.map((brand, index) => (
-							<Link key={index} to='#' className=''>
-								{brand}
-							</Link>
-						))}
+						</div>
+						<div className='px-2 text-[16px] font-bold  rounded-t-lg mb-3'>
+							{uniqueBrands.map((brand, index) => (
+								<Link key={index} to='#' className=''>
+									{brand}
+								</Link>
+							))}
+						</div>
 					</div>
 				</div>
 
-				<div className='lg:col-span-8'>
+				<div className='lg:col-span-8 md:block'>
 					<div className=''>
 						<small className=''></small>
 					</div>
