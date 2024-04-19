@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { ArrowLeft, ArrowRight } from 'react-bootstrap-icons';
 
 export const Products = () => {
 	const [products, setProducts] = useState([]);
@@ -119,13 +120,13 @@ export const Products = () => {
 						disabled={currentPage === 1}
 						className='mr-2 px-3 py-1 bg-blue-500 text-white rounded-md'
 					>
-						Previous
+						<ArrowLeft />
 					</button>
 					<button
 						onClick={nextPage}
 						className='px-3 py-1 bg-blue-500 text-white rounded-md'
 					>
-						Next
+						<ArrowRight />
 					</button>
 				</div>
 			</div>

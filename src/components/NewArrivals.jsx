@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { ArrowLeft, ArrowRight } from 'react-bootstrap-icons';
 
 export const NewArrivals = () => {
 	const [newItems, setNewItems] = useState([]);
@@ -114,14 +115,14 @@ export const NewArrivals = () => {
 						disabled={currentPage === 1}
 						className='mr-2 px-3 py-1 bg-blue-500 text-white rounded-md'
 					>
-						Previous
+						<ArrowLeft />
 					</button>
 					<button
 						onClick={nextPage}
-						disabled={!newItems.length} // Disable if no more items
+						disabled={!newItems.length}
 						className='px-3 py-1 bg-blue-500 text-white rounded-md'
 					>
-						Next
+						<ArrowRight />
 					</button>
 				</div>
 			</div>
