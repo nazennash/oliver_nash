@@ -101,9 +101,12 @@ export const Navbar = () => {
 								<a className='mr-5 hover:text-gray-900'>
 									<span>Messages</span>
 								</a>
-								<a className='mr-5 hover:text-gray-900'>
-									<span>Favourite</span>
-								</a>
+								<Link
+									to='orders'
+									className='mr-5 hover:text-gray-900'
+								>
+									<span>Orders</span>
+								</Link>
 								<Link
 									to='cart'
 									className='mr-5 hover:text-gray-900'

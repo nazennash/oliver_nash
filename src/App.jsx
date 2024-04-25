@@ -8,6 +8,7 @@ import { Category } from './pages/Category';
 import { Cart } from './pages/Cart';
 import { Register } from './pages/Login/Register';
 import { PageNotFound } from './pages/PageNotFound';
+import { Orders } from './pages/Order';
 
 export default function App() {
 	return (
@@ -27,6 +28,7 @@ export default function App() {
 							element={<Category />}
 						/>
 						<Route path='/cart' element={<Cart />} />
+						<Route path='/orders' element={<Orders />} />
 						<Route path='/register' element={<Register />} />
 						<Route path='*' element={<PageNotFound />} />
 					</Routes>
