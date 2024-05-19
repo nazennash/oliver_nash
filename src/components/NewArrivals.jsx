@@ -12,7 +12,7 @@ export const NewArrivals = () => {
 
 	const getNewItems = async () => {
 		try {
-			const url = `http://127.0.0.1:8000/api/new-arrivals/?page=${currentPage}`;
+			const url = `https://whale-app-tlndf.ondigitalocean.app/api/new-arrivals/?page=${currentPage}`;
 			const response = await axios.get(url);
 			setNewItems(response.data.results); // Assuming pagination response contains 'results' field
 		} catch (error) {
@@ -26,7 +26,7 @@ export const NewArrivals = () => {
 
 			if (token) {
 				const response = await axios.post(
-					`http://127.0.0.1:8000/api/add-to-cart/${productId}/`,
+					`https://whale-app-tlndf.ondigitalocean.app/api/add-to-cart/${productId}/`,
 					{ product_id: productId },
 					{
 						headers: {
