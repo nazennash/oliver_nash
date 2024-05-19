@@ -10,7 +10,7 @@ export const BrowseByCategory = () => {
 
 	const fetchCategories = async () => {
 		try {
-			const url = 'http://127.0.0.1:8000/api/main-category/';
+			const url = 'https://whale-app-tlndf.ondigitalocean.app/api/main-category/';
 			const response = await axios.get(url);
 			// console.log('data', response.data);
 			setCategories(response.data);
