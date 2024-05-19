@@ -40,7 +40,7 @@ export function Register() {
 		event.preventDefault();
 		try {
 			const response = await axios.post(
-				'http://127.0.0.1:8000/api/register/',
+				'https://whale-app-tlndf.ondigitalocean.app/api/register/',
 				{ phone_number: phoneNumber, name }
 			);
 			if (response.data.status === 200) {
@@ -65,7 +65,7 @@ export function Register() {
 		event.preventDefault();
 		try {
 			const response = await axios.post(
-				'http://127.0.0.1:8000/api/login/',
+				'https://whale-app-tlndf.ondigitalocean.app/api/login/',
 				{ phone_number: phoneNumber }
 			);
 			if (response.status === 200) {
@@ -86,7 +86,7 @@ export function Register() {
 		event.preventDefault();
 		try {
 			const response = await axios.post(
-				`http://127.0.0.1:8000/api/validate_otp/${phoneNumber}/`,
+				`https://whale-app-tlndf.ondigitalocean.app/api/validate_otp/${phoneNumber}/`,
 				{ code: otp }
 			);
 			if (response.status === 200) {
