@@ -53,7 +53,7 @@ export const Cart = () => {
 
 			if (token) {
 				await axios.delete(
-					`http://127.0.0.1:8000/api/delete/${itemId}/`,
+					`http://https://whale-app-tlndf.ondigitalocean.app/api/delete/${itemId}/`,
 					{
 						headers: {
 							Authorization: `Token ${token}`,
@@ -73,7 +73,7 @@ export const Cart = () => {
 
 			if (token) {
 				await axios.patch(
-					`http://127.0.0.1:8000/api/add/${itemId}/`,
+					`http://https://whale-app-tlndf.ondigitalocean.app/api/add/${itemId}/`,
 					null,
 					{
 						headers: {
@@ -94,7 +94,7 @@ export const Cart = () => {
 
 			if (token) {
 				await axios.patch(
-					`http://127.0.0.1:8000/api/subtract/${itemId}/`,
+					`http://https://whale-app-tlndf.ondigitalocean.app/api/subtract/${itemId}/`,
 					null,
 					{
 						headers: {
@@ -117,7 +117,7 @@ export const Cart = () => {
 
 			if (token) {
 				const response = await axios.post(
-					`http://127.0.0.1:8000/api/payment/`,
+					`http://https://whale-app-tlndf.ondigitalocean.app/api/payment/`,
 					{
 						price,
 						phone_number: phoneNumber,
