@@ -14,7 +14,7 @@ export const Details = () => {
 	}, [productId]);
 
 	const getProductData = async (productId) => {
-		const url = `http://127.0.0.1:8000/api/products/${productId}/`;
+		const url = `https://whale-app-tlndf.ondigitalocean.app/api/products/${productId}/`;
 		const response = await axios.get(url);
 		console.log('data', response.data);
 		console.log('id', productId);
@@ -27,7 +27,7 @@ export const Details = () => {
 
 			if (token) {
 				const response = await axios.post(
-					`http://127.0.0.1:8000/api/add-to-cart/${productId}/`,
+					`https://whale-app-tlndf.ondigitalocean.app/api/add-to-cart/${productId}/`,
 
 					{ product_id: productData.id },
 					{
@@ -56,7 +56,7 @@ export const Details = () => {
 
 			if (token) {
 				const response = await axios.post(
-					`http://127.0.0.1:8000/api/payment/`,
+					`https://whale-app-tlndf.ondigitalocean.app/api/payment/`,
 					{
 						price,
 						phone_number: phoneNumber,
