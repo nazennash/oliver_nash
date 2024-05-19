@@ -21,7 +21,7 @@ export const Cart = () => {
 
 			if (token) {
 				const response = await axios.get(
-					`http://127.0.0.1:8000/api/cart/`,
+					`https://whale-app-tlndf.ondigitalocean.app/api/cart/`,
 					{
 						headers: {
 							Authorization: `Token ${token}`,
