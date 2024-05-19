@@ -12,7 +12,7 @@ export const Orders = ({ token }) => {
 		try {
 			const token = localStorage.getItem('token');
 			const response = await axios.get(
-				'http://127.0.0.1:8000/api/orders/',
+				'https://whale-app-tlndf.ondigitalocean.app/api/orders/',
 				{
 					headers: {
 						Authorization: `Token ${token}`,
