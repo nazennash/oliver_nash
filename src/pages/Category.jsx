@@ -18,7 +18,7 @@ export const Category = () => {
 
 	const getCategoryProducts = async (mainCategoryId) => {
 		try {
-			const url = `http://127.0.0.1:8000/api/products/category/${mainCategoryId}/`;
+			const url = `https://whale-app-tlndf.ondigitalocean.app/api/products/category/${mainCategoryId}/`;
 			const response = await axios.get(url);
 			setCategoryProducts(response.data);
 
