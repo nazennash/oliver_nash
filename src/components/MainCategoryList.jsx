@@ -12,7 +12,7 @@ export const MainCategoryList = ({ isOpen }) => {
 	}, [isOpen]);
 
 	const getMainItem = async () => {
-		const url = 'http://127.0.0.1:8000/api/main-category/';
+		const url = 'https://whale-app-tlndf.ondigitalocean.app/api/main-category/';
 		try {
 			const response = await axios(url);
 			setMainItem(response.data);
