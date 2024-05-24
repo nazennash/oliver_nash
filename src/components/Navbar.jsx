@@ -143,7 +143,7 @@ export const Navbar = () => {
 								</a>
 								<a
 									className='mr-5 hover:text-gray-900'
-									href='/register'
+									href='register'
 								>
 									<span>Login</span>
 								</a>
