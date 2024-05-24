@@ -27,9 +27,9 @@ export default function App() {
 							path='/category/:categoryId'
 							element={<Category />}
 						/>
-						<Route path='/cart' element={<Cart />} />
-						<Route path='/orders' element={<Orders />} />
-						<Route path='/register' element={<Register />} />
+						<Route path='cart' element={<Cart />} />
+						<Route path='orders' element={<Orders />} />
+						<Route path='register' element={<Register />} />
 						<Route path='*' element={<PageNotFound />} />
 					</Routes>
 				</div>
