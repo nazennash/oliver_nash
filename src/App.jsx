@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './index.css';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -13,7 +13,6 @@ import { Orders } from './pages/Order';
 export default function App() {
 	return (
 		<div id='root'>
-			<BrowserRouter>
 				<Navbar />
 				<div className='root-container'>
 					<Routes>
@@ -34,7 +33,6 @@ export default function App() {
 					</Routes>
 				</div>
 				<Footer />
-			</BrowserRouter>
 		</div>
 	);
 }
